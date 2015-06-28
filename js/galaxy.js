@@ -25,6 +25,12 @@
 	console.log(calculate('DMIVLX'));
 }());
 
+(function X_L_I_I(){
+	
+	console.log(calculate('XLII'));
+}());
+
+
 function calculate(str){
 	var numArr = store_str(str);
 	
@@ -52,11 +58,7 @@ function calculate(str){
 		result += numArr_add[i];
 		
 	}
-	
-		
-	
 	return result;
-	
 }
 
 

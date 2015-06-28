@@ -4,20 +4,60 @@
 
 
 (function print_M(){
-    console.log(calculate('M'));
+    console.log(store_str('M'));
 }());
 
 (function print_anystr(){
-    console.log(calculate('MDCLXVI'));
+    console.log(store_str('MDCLXVI'));
     
 }());
 
 (function only_add(){
     console.log(calculate('MDCLXVI'));
-});
+}());
 
+(function D_M(){
+	console.log(calculate('DM'));
+}());
 
+(function D_M_I_V_L_X(){
+	
+	console.log(calculate('DMIVLX'));
+}());
 
+function calculate(str){
+	var numArr = store_str(str);
+	
+	var num_1 = numArr[0],
+		result = 0;
+		numArr_add = [];
+		
+	(function cal_meth(i){
+		if(i < numArr.length){
+			
+			if(numArr[i] < numArr[i+1]){				//	数组后面一个值是否大于前面的值
+				var new_nun = numArr[i+1] - numArr[i];	//	如果大于则用后面一个值减去前面的数组值
+				numArr_add.push(new_nun);
+				return 	cal_meth(i+2);	
+			}else{
+				numArr_add.push(numArr[i]);
+				return 	cal_meth(i+1);	
+			}
+		}else{
+			return numArr_add;
+		}
+		
+	}(0));
+	for(var i = 0 ,len = numArr_add.length; i < len;i++){
+		result += numArr_add[i];
+		
+	}
+	
+		
+	
+	return result;
+	
+}
 
 
 function store_str(str){

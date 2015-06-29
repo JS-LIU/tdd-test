@@ -85,5 +85,10 @@ function conferencePlan(arr){
 		}
 	}(0,init_afcon,1));	
 	console.log(afternoonresult);
-	return morningresult;
+	var result = {
+		morning:morningresult,
+		after:afternoonresult
+	};
+	
+	return result;
 }

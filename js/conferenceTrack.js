@@ -37,22 +37,53 @@ function conferencePlan(arr){
 	});
 	
 	newArr = newArr.reverse();
-	console.log(newArr);
-	var result = [];
+	var morningresult = [],
+		afternoon = [];
+	afternoon = newArr.slice(0);
 	var init_con = newArr[0].time;
 	
-	(function reorder(i,init_time){
+	(function reorder(i,init_time,j){
 		
-		if( init_time + newArr[i+1].time < 180){
-			result.push(newArr[i]);
-			result.push(newArr[i+1]);
-			init_time = init_time + newArr[i+1].time;
-			return reorder(i + 2,init_time);
-		}else if(init_time + newArr[i+1].time == 180){
-			result.push(newArr[i+1]);
-			return result;
+		if( (init_time + newArr[i+j].time) < 180){
+			morningresult.push(newArr[i]);
+			morningresult.push(newArr[i+j]);
+			
+			afternoon.splice(i,1);
+			afternoon.splice(i+j,1);
+			
+			init_time = init_time + newArr[i+j].time;
+			return reorder(i + j + 1,init_time,j);
+		}else if(init_time + newArr[i+j].time == 180){
+			afternoon.splice(i+j,1);
+			morningresult.push(newArr[i+j]);
+			
+			return morningresult;
+		}else if(init_time + newArr[i+1].time > 180){
+			j++;
+			return reorder(i + j,init_time,j);
 		}
-	}(0,init_con));	
+	}(0,init_con,1));	
 	
-	return result;
+    var afternoonresult = [afternoon[0]];
+    var init_afcon = afternoon[0].time; 
+	
+	(function reorderaf(i,init_time,j){
+		var nowtime = init_time + afternoon[i+j].time;
+		if(nowtime < 240){
+			afternoonresult.push(afternoon[i+j]);
+			init_time = init_time + afternoon[i+j].time;
+			return reorderaf(i + j + 1,init_time,j);
+		}else if(nowtime == 240){
+			afternoonresult.push(afternoon[i+j]);
+			console.log(1);
+			return afternoonresult;
+		}else if(nowtime > 240){
+			console.log(nowtime);
+			j++;
+			console.log(afternoonresult);
+			return reorderaf(i + j,init_time,j);
+		}
+	}(0,init_afcon,1));	
+	console.log(afternoonresult);
+	return morningresult;
 }

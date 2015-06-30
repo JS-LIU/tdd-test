@@ -4,37 +4,53 @@
 (function test_2_multiply_3(){
     console.log(multiply('2','3'));
 }());
-
-(function test_3_multiply_4(){
-    console.log(multiply('3','4'));
+(function test_4_multiply_5(){
+    console.log(multiply('4','5'));
+}());
+(function test_47_multiply_5(){
+    console.log(multiply('999','5'));
 }());
 
-(function test_3_multiply_12(){
-    console.log(multiply('3','2313'));
+(function test_22_mutiply_22(){
+	console.log(multiply('22','22'));
 }());
-
 
 function multiply(multA,multB){
-    var numA = multA[multA.length - 1],
-        numB,
-        result = '';
+	 
+		
 
-    for(var i = (multB.length - 1); i >= 0; i--){
-        numB = multB[i];
-        var result_num = numA * numB; 
-        //  进位
-        var carry_bit = parseInt(result_num / 10) +'';
-        // 余数
-        var remainder = result_num % 10 +'';
-
-        result += remainder;
-    }
-    if(carry_bit != 0){
-        result =  remainder + carry_bit;
-    }
-    
-    result = result.split('').reverse().join('');
-    
-    return  result;   
+	resultStringOld = '';
+	for(var i = multB.length -1; i >= 0; i--){
+		var b = multB[i],
+			carry = 0,
+			rem = 0,
+			resultStringNew = '';
+			
+		for(var j = multA.length - 1; j >= 0; j--){
+			var result = multA[j] * b;
+	
+			rem = result % 10 + carry;
+	
+			carry = parseInt(result / 10);
+			resultStringNew += int_string(rem);
+			
+		}
+		resultStringNew = resultStringNew += int_string(carry);
+		resultStringNew = resultString.split('').reverse().join('');
+		if(resultStringOld.length+1 < resultStringNew.length){
+			for(var l = 0;l < resultStringNew.length - (resultStringOld.length+1);l++){
+				resultStringOld +='0';
+			}
+		}
+		for(var k = resultStringNew.length - 1; k >= 0 ;k-- ){
+			resultStringNew[k] + resultStringOld			
+		}
+	}
+	
+	return resultString;
+	
 };
 
+function int_string(a){
+	return a + '';
+}

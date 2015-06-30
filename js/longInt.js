@@ -12,7 +12,7 @@
 }());
 
 (function test_22_mutiply_22(){
-	console.log(multiply('22','22'));
+	console.log(multiply('23','21'));
 }());
 
 function multiply(multA,multB){
@@ -20,11 +20,13 @@ function multiply(multA,multB){
 		
 
 	resultStringOld = '';
+	resultt = '';
 	for(var i = multB.length -1; i >= 0; i--){
 		var b = multB[i],
 			carry = 0,
 			rem = 0,
 			resultStringNew = '';
+			
 			
 		for(var j = multA.length - 1; j >= 0; j--){
 			var result = multA[j] * b;
@@ -35,19 +37,20 @@ function multiply(multA,multB){
 			resultStringNew += int_string(rem);
 			
 		}
-		resultStringNew = resultStringNew += int_string(carry);
-		resultStringNew = resultString.split('').reverse().join('');
-		if(resultStringOld.length+1 < resultStringNew.length){
-			for(var l = 0;l < resultStringNew.length - (resultStringOld.length+1);l++){
-				resultStringOld +='0';
-			}
+		
+		if(int_string(carry)!=0){
+			resultStringNew = (resultStringNew += int_string(carry));
 		}
-		for(var k = resultStringNew.length - 1; k >= 0 ;k-- ){
-			resultStringNew[k] + resultStringOld			
+		if(multB.length > 1){
+			var resultStringOld = resultStringNew;
 		}
+		if(i > 0){
+			
+			
+		}				
 	}
 	
-	return resultString;
+	return resultt;
 	
 };
 

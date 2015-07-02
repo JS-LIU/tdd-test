@@ -22,21 +22,37 @@
 	console.log(multiply('33','33'));
 }());
 
+(function test_333_mutiply_323(){
+	console.log(multiply('333','323'));
+}());
+
 function multiply(multA,multB){
-	 
+	 var digA,
+	 	digB;
+	 if(multA.length >= multB){
+ 		digA = multA;
+ 		digB = multB;
+	 }else{
+	 	digA = multB;
+	 	digB = multA;
+	 	
+	 	
+	 }
 		
 
 	var resultStringOld = '',
 		cover = '';
-	for(var i = multB.length -1; i >= 0; i--){
-		var b = multB[i],
+		
+
+	for(var i = digB.length -1; i >= 0; i--){
+		var b = digB[i],
 			carry = 0,
 			rem = 0,
 			resultStringNew = '';
 			
 			
-		for(var j = multA.length - 1; j >= 0; j--){
-			var result = multA[j] * b;
+		for(var j = digA.length - 1; j >= 0; j--){
+			var result = digA[j] * b;
 	
 			rem = result % 10 + carry;
 	
@@ -52,7 +68,7 @@ function multiply(multA,multB){
 		}
 		resultStringNew = resultStringNew.split('').reverse().join('');
 		
-		if(i == multB.length -1){
+		if(i == digB.length -1){
 			resultStringOld = resultStringNew;
 		}else{
 			
@@ -72,14 +88,8 @@ function multiply(multA,multB){
 				add_rem = a % 10;
 				add_carry = parseInt(a / 10);
 				resultt += add_rem ;
-				// resultt = resultt.split('').reverse().join('');
-				// resultStringOld = resultStringOld.split('');	
-				// resultStringOld[k] = int_string(parseInt(resultStringNew[k]) + parseInt(resultStringOld[k]));
-				// resultStringOld = resultStringOld.join('');
-				// resultt = carry + resultt;
-				// resultStringOld = resultt;
 			}
-			console.log(add_carry);
+
 			if(add_carry!=0){
 				resultt += int_string(add_carry);
 			}
